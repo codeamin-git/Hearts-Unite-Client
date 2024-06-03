@@ -9,6 +9,7 @@ import ContactUs from "../pages/ContactUs/ContactUs";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
+import SingleBiodataDetails from "../pages/SingleBiodataDetails/SingleBiodataDetails";
   
   export const router = createBrowserRouter([
         {
@@ -23,6 +24,10 @@ import SignUp from "../pages/SignUp/SignUp";
             {
               path: '/biodatas',
               element: <Biodatas></Biodatas>
+            },
+            {
+              path: '/biodata/:id',
+              element: <SingleBiodataDetails></SingleBiodataDetails>
             },
             {
               path: '/aboutUs',

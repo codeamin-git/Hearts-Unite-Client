@@ -1,4 +1,5 @@
 import { Button, Card } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 const BiodataDetails = ({biodata}) => {
     return (
@@ -15,9 +16,11 @@ const BiodataDetails = ({biodata}) => {
         <span className="text-sm text-gray-500 dark:text-gray-400">Age: {biodata.age}</span>
         <span className="text-sm text-gray-500 dark:text-gray-400">Occupation: {biodata.occupation}</span>
         <div className="mt-4 flex space-x-3 lg:mt-6">
+          <Link to={`/biodata/${biodata._id}`}>
           <Button gradientDuoTone="purpleToPink">
             View Profile
           </Button>
+          </Link>
         </div>
       </div>
     </Card>

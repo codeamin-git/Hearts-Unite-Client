@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import LoadingSpinner from '../../components/Shared/LoadingSpinner';
 import BiodataDetails from './BiodataDetails';
 import BiodataFilterForm from './BiodataFilterForm';
+import useAxiosCommon from '../../../hooks/useAxiosCommon';
 
 const Biodatas = () => {
-    const axiosSecure = useAxiosSecure();
+    const axiosCommon = useAxiosCommon()
 
     const [filters, setFilters] = useState({
         biodataType: '',
@@ -18,7 +18,7 @@ const Biodatas = () => {
     const { data: biodatas = [], isLoading } = useQuery({
         queryKey: ['biodatas'],
         queryFn: async () => {
-            const { data } = await axiosSecure.get('/biodatas');
+            const { data } = await axiosCommon.get('/biodatas');
             return data;
         }
     });
