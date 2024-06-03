@@ -33,7 +33,7 @@ const Nav = () => {
     </Navbar.Brand>
     </Link>
     <div className="flex md:order-2">
-      <Button>Get started</Button>
+      <Link to='/login'><Button outline gradientDuoTone='purpleToBlue'>Login</Button></Link>
       <Navbar.Toggle />
     </div>
     <Navbar.Collapse>

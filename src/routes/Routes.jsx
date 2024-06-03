@@ -7,6 +7,8 @@ import Biodatas from "../pages/Biodatas/Biodatas";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import Login from "../pages/Login/Login";
+import SignUp from "../pages/SignUp/SignUp";
   
   export const router = createBrowserRouter([
         {
@@ -30,6 +32,14 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
               path: '/contactUs',
               element: <ContactUs></ContactUs>
             },
+            {
+              path: '/login',
+              element: <Login></Login>
+            },
+            {
+              path: '/signup',
+              element: <SignUp></SignUp>
+            }
           ]
         },
       ]);
