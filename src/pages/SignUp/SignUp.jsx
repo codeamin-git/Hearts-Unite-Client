@@ -1,8 +1,56 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import { Button } from 'flowbite-react'
+import useAuth from '../../../hooks/useAuth'
+import axios from 'axios'
+import toast from 'react-hot-toast'
+import { ImSpinner } from "react-icons/im";
 
 const SignUp = () => {
+  const {createUser, signInWithGoogle, updateUserProfile, loading, setLoading} = useAuth();
+  const navigate = useNavigate()
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const image = form.image.files[0];
+
+    const formData = new FormData();
+    formData.append('image', image)
+    try{
+      setLoading(true)
+      // upload image and get url
+      const {data} = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, formData)
+      console.log(data);
+      
+      // create user with email password
+      const result = await createUser(email, password)
+      console.log(result);
+
+      // save username and photo in firebase
+      await updateUserProfile(name, data.data.display_url)
+      navigate('/')
+      toast.success('Registration successful!')
+
+    } catch(err){
+      console.log(err);
+      toast.error(err.message)
+    }
+  }
+
+  // handle google sign in
+  const handleGoogleSignIn = async () => {
+    try{
+      await signInWithGoogle()
+      navigate('/')
+    }catch(err){
+      console.log(err);
+    }
+  }
+
   return (
     <div className='flex justify-center items-center min-h-screen'>
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
@@ -10,10 +58,7 @@ const SignUp = () => {
           <h1 className='my-3 text-4xl font-bold'>Sign Up</h1>
           <p className='text-sm text-gray-400'>Welcome to HeartsUnite</p>
         </div>
-        <form
-          noValidate=''
-          action=''
-          className='space-y-6 ng-untouched ng-pristine ng-valid'
+        <form onSubmit={handleSubmit} className='space-y-6'
         >
           <div className='space-y-4'>
             <div>
@@ -26,7 +71,8 @@ const SignUp = () => {
                 id='name'
                 placeholder='Enter Your Name Here'
                 className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
-                data-temp-mail-org='0'
+                data-temp-mail-org='0' 
+                required
               />
             </div>
             <div>
@@ -38,7 +84,7 @@ const SignUp = () => {
                 type='file'
                 id='image'
                 name='image'
-                accept='image/*'
+                accept='image/*' 
               />
             </div>
             <div>
@@ -52,7 +98,7 @@ const SignUp = () => {
                 required
                 placeholder='Enter Your Email Here'
                 className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
-                data-temp-mail-org='0'
+                data-temp-mail-org='0' 
               />
             </div>
             <div>
@@ -75,12 +121,13 @@ const SignUp = () => {
 
           <div>
           <Button 
+            disabled={loading}
             size=''
             gradientDuoTone="purpleToPink"
               type='submit'
               className='w-full rounded-md py-3 text-white'
             >
-              Continue
+              {loading ? <ImSpinner className='animate-spin text-xl'/> : 'Continue'}
             </Button>
           </div>
         </form>
@@ -91,11 +138,11 @@ const SignUp = () => {
           </p>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
         </div>
-        <div className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+        <button onClick={handleGoogleSignIn} disabled={loading} className='disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
           <FcGoogle size={32} />
 
           <p>Continue with Google</p>
-        </div>
+        </button>
         <p className='px-6 text-sm text-center text-gray-400'>
           Already have an account?{' '}
           <Link
