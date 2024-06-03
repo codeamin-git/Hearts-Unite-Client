@@ -52,6 +52,7 @@ const Login = () => {
 
           <div>
             <Button 
+            size=''
             gradientDuoTone="purpleToPink"
               type='submit'
               className='w-full rounded-md py-3 text-white'
