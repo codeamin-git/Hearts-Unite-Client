@@ -23,7 +23,7 @@ const Nav = () => {
 
   return (
     
-    <Navbar fluid rounded className='shadow-md sticky'>
+    <Navbar fluid rounded className='shadow-md sticky mb-4'>
     <Link to='/'>
     <Navbar.Brand>
       <img src={logo} className="mr-1 h-6 sm:h-9" alt="Flowbite React Logo" />
