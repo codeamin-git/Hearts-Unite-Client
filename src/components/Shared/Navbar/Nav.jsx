@@ -26,7 +26,7 @@ const Nav = () => {
     <Navbar fluid rounded className='shadow-md sticky mb-4'>
     <Link to='/'>
     <Navbar.Brand>
-      <img src={logo} className="mr-1 h-6 sm:h-9" alt="Flowbite React Logo" />
+      <img src={logo} className="mr-1 h-6 sm:h-9" />
       <p className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
         <span className='bg-gradient-to-r from-purple-400 to-purple-100 rounded-xl p-2'>HeartsUnite</span>
       </p>
