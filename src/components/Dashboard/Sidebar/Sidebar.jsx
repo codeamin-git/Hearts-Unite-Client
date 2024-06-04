@@ -1,11 +1,19 @@
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../../public/HeartsUnite.png'
 import { FaEdit, FaStreetView } from "react-icons/fa";
-import { MdPermContactCalendar } from "react-icons/md";
+import { MdFavorite, MdPermContactCalendar } from "react-icons/md";
+import { Button } from 'flowbite-react';
+import useAuth from '../../../../hooks/useAuth';
 
 const Sidebar = () => {
+    const {logOut} = useAuth();
+    const handleLogOut = () => {
+        logOut()
+    }
     return (
-        <div className='bg-purple-100 min-h-screen p-4 w-64'>
+        <div className='bg-purple-100 min-h-screen p-4 w-64 flex flex-col justify-between'>
+            <div>
+                {/* logo */}
             <div>
                 <Link to='/'>
                 <div className='flex'>
@@ -16,7 +24,6 @@ const Sidebar = () => {
                 </div>
                 </Link>
             </div>
-
             {/* menu items */}
             <ul className='mt-6 space-y-4'>
                 <li className='flex items-center gap-2'>
@@ -31,7 +38,18 @@ const Sidebar = () => {
                 <MdPermContactCalendar />
                     <NavLink to='/dashboard/myContactRequest' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'}>My Contact Request</NavLink>
                 </li>
+                <li className='flex items-center gap-2'>
+                <MdFavorite />
+                    <NavLink to='/dashboard/favouritesBiodata' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'}>Favourites Biodata </NavLink>
+                </li>
             </ul>
+            </div>
+
+
+
+            <Button onClick={handleLogOut} className='' gradientDuoTone="pinkToOrange">Logout</Button>
+   
+
         </div>
     );
 };

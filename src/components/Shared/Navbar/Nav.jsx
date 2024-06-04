@@ -42,7 +42,7 @@ const Nav = () => {
     <div className="flex md:order-2">
       
       {
-        user ? <Button onClick={handleLogout} outline gradientDuoTone='purpleToBlue'>Logout</Button> : <Link to='/login'><Button outline gradientDuoTone='purpleToBlue'>Login</Button></Link>
+        user ? <Button onClick={handleLogout} outline gradientDuoTone="pinkToOrange">Logout</Button> : <Link to='/login'><Button outline gradientDuoTone='purpleToBlue'>Login</Button></Link>
       }
       <Navbar.Toggle />
     </div>

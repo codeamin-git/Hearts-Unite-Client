@@ -12,9 +12,10 @@ import SignUp from "../pages/SignUp/SignUp";
 import SingleBiodataDetails from "../pages/SingleBiodataDetails/SingleBiodataDetails";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
-import EditBiodata from "../components/Dashboard/EditeBiodata/EditBiodata";
-import ViewBiodata from "../components/Dashboard/ViewBiodata/ViewBiodata";
-import MyContactRequest from "../components/Dashboard/MyContactRequest/MyContactRequest";
+import EditBiodata from "../pages/Dashboard/NormalUser/EditeBiodata/EditBiodata";
+import ViewBiodata from "../pages/Dashboard/NormalUser/ViewBiodata/ViewBiodata";
+import MyContactRequest from "../pages/Dashboard/NormalUser/MyContactRequest/MyContactRequest";
+import FavouritesBiodata from "../pages/Dashboard/NormalUser/FavouritesBiodata/FavouritesBiodata";
   
   export const router = createBrowserRouter([
         {
@@ -54,7 +55,7 @@ import MyContactRequest from "../components/Dashboard/MyContactRequest/MyContact
         },
         {
           path: 'dashboard',
-          element: <DashboardLayout></DashboardLayout>,
+          element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
           children: [
             {
               path: 'editBiodata',
@@ -67,6 +68,10 @@ import MyContactRequest from "../components/Dashboard/MyContactRequest/MyContact
             {
               path: 'myContactRequest',
               element: <MyContactRequest></MyContactRequest>
+            },
+            {
+              path: 'favouritesBiodata',
+              element: <FavouritesBiodata></FavouritesBiodata>
             },
           ]
         }
