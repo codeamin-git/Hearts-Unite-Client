@@ -2,11 +2,29 @@
 
 import { Button } from "flowbite-react";
 import useAuth from "../../../../hooks/useAuth";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const EditBiodata = () => {
     const {user} = useAuth()
+    const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
 
-    const handleSubmit = e => {
+    const {mutateAsync} = useMutation({
+      mutationFn: async (biodata) => {
+        const {data} = await axiosSecure.post('/biodata', biodata)
+        return data
+      },
+      onSuccess:()=>{
+        console.log('biodata added to the data base successfully!');
+        toast.success('Biodata Created Successfully!');
+        navigate('/biodatas')
+      }
+    })
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
         const biodataType = form.biodataType.value;
@@ -28,9 +46,26 @@ const EditBiodata = () => {
         const expectedPartnerWeightTo = form.expectedPartnerWeightTo.value;
         const contactEmail = form.contactEmail.value;
         const mobileNumber = form.mobileNumber.value;
+        
+        const expectedPartner = {
+          age: expectedPartnerAge,
+          height: `${expectedPartnerHeightFrom}-${expectedPartnerHeightTo}`,
+          weight: `${expectedPartnerWeightFrom}-${expectedPartnerWeightTo}`
+        }
+        console.log(biodataType, name, profileImage, dateOfBirth, height, weight,age, occupation, race, fathersName, mothersName, permanentDivision, expectedPartner, contactEmail, mobileNumber);
+        
+        try{
+          const biodata = {
+            biodataType, name, profileImage, dateOfBirth, height, weight,age, occupation, race, fathersName, mothersName, permanentDivision, expectedPartner, contactEmail, mobileNumber
+          }
+          // post request to server
+          await mutateAsync(biodata)
+        }catch(err){
+          console.log(err);
+          toast.error(err.message)
+        }
 
-        console.log(biodataType, name, profileImage, dateOfBirth, height, weight,age, occupation, race, fathersName, mothersName, permanentDivision, expectedPartnerAge, expectedPartnerHeightFrom, expectedPartnerHeightTo, expectedPartnerWeightFrom, expectedPartnerWeightTo, contactEmail, mobileNumber);
-    }
+      }
     return (
         <div>
             <form onSubmit={handleSubmit}>
