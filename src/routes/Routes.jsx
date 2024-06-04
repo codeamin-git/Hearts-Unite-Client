@@ -12,10 +12,11 @@ import SignUp from "../pages/SignUp/SignUp";
 import SingleBiodataDetails from "../pages/SingleBiodataDetails/SingleBiodataDetails";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
-import EditBiodata from "../pages/Dashboard/NormalUser/EditeBiodata/EditBiodata";
-import ViewBiodata from "../pages/Dashboard/NormalUser/ViewBiodata/ViewBiodata";
-import MyContactRequest from "../pages/Dashboard/NormalUser/MyContactRequest/MyContactRequest";
-import FavouritesBiodata from "../pages/Dashboard/NormalUser/FavouritesBiodata/FavouritesBiodata";
+import EditBiodata from "../pages/Dashboard/NormalUser/EditBiodata";
+import ViewBiodata from "../pages/Dashboard/NormalUser/ViewBiodata";
+import MyContactRequest from "../pages/Dashboard/NormalUser/MyContactRequest";
+import FavouritesBiodata from "../pages/Dashboard/NormalUser/FavouritesBiodata";
+
   
   export const router = createBrowserRouter([
         {

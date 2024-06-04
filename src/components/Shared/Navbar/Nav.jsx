@@ -1,5 +1,3 @@
-import Container from '../Container'
-import { AiOutlineMenu } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import useAuth from '../../../../hooks/useAuth'
 import logo from '../../../../public/HeartsUnite.png'
