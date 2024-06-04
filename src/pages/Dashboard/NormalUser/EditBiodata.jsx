@@ -39,6 +39,7 @@ const EditBiodata = () => {
         const fathersName = form.fathersName.value;
         const mothersName = form.mothersName.value;
         const permanentDivision = form.permanentDivision.value;
+        const presentDivision = form.presentDivision.value;
         const expectedPartnerAge = form.expectedPartnerAge.value;
         const expectedPartnerHeightFrom = form.expectedPartnerHeightFrom.value;
         const expectedPartnerHeightTo = form.expectedPartnerHeightTo.value;
@@ -52,11 +53,11 @@ const EditBiodata = () => {
           height: `${expectedPartnerHeightFrom}-${expectedPartnerHeightTo}`,
           weight: `${expectedPartnerWeightFrom}-${expectedPartnerWeightTo}`
         }
-        console.log(biodataType, name, profileImage, dateOfBirth, height, weight,age, occupation, race, fathersName, mothersName, permanentDivision, expectedPartner, contactEmail, mobileNumber);
+        // console.log(biodataType, name, profileImage, dateOfBirth, height, weight,age, occupation, race, fathersName, mothersName, permanentDivision, presentDivision, expectedPartner, contactEmail, mobileNumber);
         
         try{
           const biodata = {
-            biodataType, name, profileImage, dateOfBirth, height, weight,age, occupation, race, fathersName, mothersName, permanentDivision, expectedPartner, contactEmail, mobileNumber
+            biodataType, name, profileImage, dateOfBirth, height, weight,age, occupation, race, fathersName, mothersName, permanentDivision, presentDivision, expectedPartner, contactEmail, mobileNumber
           }
           // post request to server
           await mutateAsync(biodata)
@@ -173,6 +174,20 @@ const EditBiodata = () => {
                 <div className="mb-4">
                     <label htmlFor="permanentDivision" className="block text-gray-700 font-bold mb-2">Permanent Division</label>
                     <select required name="permanentDivision" id="permanentDivision" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400">
+                        <option value="">Default</option>
+                        <option value="Dhaka">Dhaka</option>
+                        <option value="Chattagram">Chattagram</option>
+                        <option value="Rangpur">Rangpur</option>
+                        <option value="Barisal">Barisal</option>
+                        <option value="Khulna">Khulna</option>
+                        <option value="Mymensingh">Mymensingh</option>
+                        <option value="Sylhet">Sylhet</option>
+                    </select>
+                </div>
+                {/* presentDivision */}
+                <div className="mb-4">
+                    <label htmlFor="presentDivision" className="block text-gray-700 font-bold mb-2">Present Division</label>
+                    <select required name="presentDivision" id="presentDivision" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400">
                         <option value="">Default</option>
                         <option value="Dhaka">Dhaka</option>
                         <option value="Chattagram">Chattagram</option>

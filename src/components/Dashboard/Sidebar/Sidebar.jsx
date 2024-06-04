@@ -11,7 +11,7 @@ const Sidebar = () => {
         logOut()
     }
     return (
-        <div className='bg-purple-100 min-h-screen p-4 w-64 flex flex-col justify-between'>
+        <div className='bg-purple-100 min-h-screen w-auto md:w-64 p-4 flex flex-col justify-between'>
             <div>
                 {/* logo */}
             <div>
