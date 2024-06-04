@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../../public/HeartsUnite.png'
 import { FaEdit, FaStreetView } from "react-icons/fa";
+import { MdPermContactCalendar } from "react-icons/md";
 
 const Sidebar = () => {
     return (
@@ -20,15 +21,15 @@ const Sidebar = () => {
             <ul className='mt-6 space-y-4'>
                 <li className='flex items-center gap-2'>
                     <FaEdit></FaEdit>
-                    <NavLink to='/dashboard/editBiodata' className='text-xl'>Edit Biodata</NavLink>
+                    <NavLink to='/dashboard/editBiodata' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'}>Edit Biodata</NavLink>
                 </li>
                 <li className='flex items-center gap-2'>
                     <FaStreetView></FaStreetView>
-                    <NavLink to='/dashboard/viewBiodata' className='text-xl'>View Biodata</NavLink>
+                    <NavLink to='/dashboard/viewBiodata' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'}>View Biodata</NavLink>
                 </li>
                 <li className='flex items-center gap-2'>
-                    <FaStreetView></FaStreetView>
-                    <NavLink to='/dashboard/myContactRequest' className='text-xl'>My Contact Request</NavLink>
+                <MdPermContactCalendar />
+                    <NavLink to='/dashboard/myContactRequest' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'}>My Contact Request</NavLink>
                 </li>
             </ul>
         </div>

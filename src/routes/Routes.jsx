@@ -14,6 +14,7 @@ import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import EditBiodata from "../components/Dashboard/EditeBiodata/EditBiodata";
 import ViewBiodata from "../components/Dashboard/ViewBiodata/ViewBiodata";
+import MyContactRequest from "../components/Dashboard/MyContactRequest/MyContactRequest";
   
   export const router = createBrowserRouter([
         {
@@ -62,6 +63,10 @@ import ViewBiodata from "../components/Dashboard/ViewBiodata/ViewBiodata";
             {
               path: 'viewBiodata',
               element: <ViewBiodata></ViewBiodata>
+            },
+            {
+              path: 'myContactRequest',
+              element: <MyContactRequest></MyContactRequest>
             },
           ]
         }
