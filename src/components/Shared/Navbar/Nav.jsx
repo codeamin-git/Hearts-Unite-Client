@@ -9,6 +9,10 @@ import { Button, Navbar } from "flowbite-react";
 const Nav = () => {
   const { user, logOut } = useAuth();
 
+  const handleLogout = () => {
+    logOut()
+  }
+
   const navLinks = <>
   <Link to='/'>
   <Navbar.Link>
@@ -19,6 +23,9 @@ const Nav = () => {
       <Link to='/aboutUs'><Navbar.Link>About us</Navbar.Link></Link>
       <Link to='/contactUs'><Navbar.Link>Contact us</Navbar.Link></Link>
 
+      {
+        user && <Link to='/dashboard'><Navbar.Link>Dashboard</Navbar.Link></Link>
+      }
   </>
 
   return (
@@ -33,7 +40,10 @@ const Nav = () => {
     </Navbar.Brand>
     </Link>
     <div className="flex md:order-2">
-      <Link to='/login'><Button outline gradientDuoTone='purpleToBlue'>Login</Button></Link>
+      
+      {
+        user ? <Button onClick={handleLogout} outline gradientDuoTone='purpleToBlue'>Logout</Button> : <Link to='/login'><Button outline gradientDuoTone='purpleToBlue'>Login</Button></Link>
+      }
       <Navbar.Toggle />
     </div>
     <Navbar.Collapse>

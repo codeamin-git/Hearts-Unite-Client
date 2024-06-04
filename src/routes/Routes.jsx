@@ -10,6 +10,9 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import SingleBiodataDetails from "../pages/SingleBiodataDetails/SingleBiodataDetails";
+import PrivateRoute from "./PrivateRoute";
+import DashboardLayout from "../layouts/DashboardLayout";
+import EditBiodata from "../components/Dashboard/EditeBiodata/EditBiodata";
   
   export const router = createBrowserRouter([
         {
@@ -27,7 +30,7 @@ import SingleBiodataDetails from "../pages/SingleBiodataDetails/SingleBiodataDet
             },
             {
               path: '/biodata/:id',
-              element: <SingleBiodataDetails></SingleBiodataDetails>
+              element: <PrivateRoute><SingleBiodataDetails></SingleBiodataDetails></PrivateRoute>
             },
             {
               path: '/aboutUs',
@@ -45,6 +48,20 @@ import SingleBiodataDetails from "../pages/SingleBiodataDetails/SingleBiodataDet
               path: '/signup',
               element: <SignUp></SignUp>
             }
-          ]
+          ],
         },
+        {
+          path: 'dashboard',
+          element: <DashboardLayout></DashboardLayout>,
+          children: [
+            {
+              path: 'editBiodata',
+              element: <EditBiodata></EditBiodata>
+            },
+            {
+              path: 'viewBiodata',
+              element: <EditBiodata></EditBiodata>
+            },
+          ]
+        }
       ]);
