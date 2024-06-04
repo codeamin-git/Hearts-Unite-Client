@@ -26,6 +26,10 @@ const Sidebar = () => {
                     <FaStreetView></FaStreetView>
                     <NavLink to='/dashboard/viewBiodata' className='text-xl'>View Biodata</NavLink>
                 </li>
+                <li className='flex items-center gap-2'>
+                    <FaStreetView></FaStreetView>
+                    <NavLink to='/dashboard/myContactRequest' className='text-xl'>My Contact Request</NavLink>
+                </li>
             </ul>
         </div>
     );

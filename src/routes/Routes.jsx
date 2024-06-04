@@ -13,6 +13,7 @@ import SingleBiodataDetails from "../pages/SingleBiodataDetails/SingleBiodataDet
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import EditBiodata from "../components/Dashboard/EditeBiodata/EditBiodata";
+import ViewBiodata from "../components/Dashboard/ViewBiodata/ViewBiodata";
   
   export const router = createBrowserRouter([
         {
@@ -60,7 +61,7 @@ import EditBiodata from "../components/Dashboard/EditeBiodata/EditBiodata";
             },
             {
               path: 'viewBiodata',
-              element: <EditBiodata></EditBiodata>
+              element: <ViewBiodata></ViewBiodata>
             },
           ]
         }
