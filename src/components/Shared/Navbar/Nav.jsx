@@ -28,7 +28,7 @@ const Nav = () => {
 
   return (
     
-    <Navbar fluid rounded className='shadow-md sticky mb-4'>
+    <Navbar fluid rounded className='shadow-md sticky'>
     <Link to='/'>
     <Navbar.Brand>
       <img src={logo} className="mr-1 h-6 sm:h-9" />

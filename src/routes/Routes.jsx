@@ -2,7 +2,7 @@ import {
     createBrowserRouter,
   } from "react-router-dom";
 import Main from "../layouts/Main";
-import Home from "../pages/Home/Home";
+<Home></Home>
 import Biodatas from "../pages/Biodatas/Biodatas";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import ContactUs from "../pages/ContactUs/ContactUs";
@@ -16,6 +16,7 @@ import EditBiodata from "../pages/Dashboard/NormalUser/EditBiodata";
 import ViewBiodata from "../pages/Dashboard/NormalUser/ViewBiodata";
 import MyContactRequest from "../pages/Dashboard/NormalUser/MyContactRequest";
 import FavouritesBiodata from "../pages/Dashboard/NormalUser/FavouritesBiodata";
+import Home from "../pages/Home/Home/Home";
 
   
   export const router = createBrowserRouter([
