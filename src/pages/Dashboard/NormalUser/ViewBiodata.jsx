@@ -22,7 +22,7 @@ const ViewBiodata = () => {
     return (
         <div>
             <h2 className="text-3xl font-semibold mb-6">Welcome to your biodata section!</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {
                 biodatas.map(biodata => <Card key={biodata._id} className="max-w-sm">
                 <div className="flex flex-col pb-4 items-center">
@@ -30,26 +30,30 @@ const ViewBiodata = () => {
                     src={biodata?.profileImage}
                     className="mb-3 rounded-full shadow-lg h-24 w-24"
                   />
-                  <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">Biodata Id: {biodata?.biodataId}</h5>
-                  <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">Biodata Type: {biodata?.biodataType}</h5>
-                  <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">Name: {biodata?.name}</h5>
-                  <span className=" text-gray-900 dark:text-gray-400">Date Of Birth: {biodata?.dateOfBirth}</span>
-                  <span className=" text-gray-900 dark:text-gray-400">Height: {biodata?.height}</span>
-                  <span className=" text-gray-900 dark:text-gray-400">Weight: {biodata?.weight}</span>
-                  <span className=" text-gray-900 dark:text-gray-400">Age: {biodata?.age}</span>
-                  <span className=" text-gray-900 dark:text-gray-400">Occupation: {biodata?.occupation}</span>
-                  <span className=" text-gray-900 dark:text-gray-400">Race: {biodata?.race}</span>
-                  <span className=" text-gray-900 dark:text-gray-400">Father's Name: {biodata?.fathersName}</span>
-                  <span className=" text-gray-900 dark:text-gray-400">Mother's Name: {biodata?.mothersName}</span>
-                  <span className="text-gray-900 dark:text-gray-400">Permanent Address: {biodata?.permanentDivision}</span>
-                  <span className="text-gray-900 dark:text-gray-400">Present Address: {biodata?.presentDivision}</span>
-                  <span className="text-gray-900 dark:text-gray-400">Expected Partner's Age: {biodata?.expectedPartner?.age}</span>
-                  <span className="text-gray-900 dark:text-gray-400">Expected Partner's Height: {biodata?.expectedPartner?.height}</span>
-                  <span className="text-gray-900 dark:text-gray-400">Expected Partner's Weight: {biodata?.expectedPartner?.weight}</span>
+
+                 <div>
+                 <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white"><span className="font-bold">Biodata Id:</span> {biodata?.biodataId}</h5>
+                  <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white"><span className="font-bold">Biodata Type:</span> {biodata?.biodataType}</h5>
+                  <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white"><span className="font-bold">Name:</span> {biodata?.name}</h5>
+                  <p className=" text-gray-900 dark:text-gray-400"><span className="font-bold">Date Of Birth:</span> {biodata?.dateOfBirth}</p>
+                  <p className=" text-gray-900 dark:text-gray-400"><span className="font-bold">Height:</span> {biodata?.height}</p>
+                  <p className=" text-gray-900 dark:text-gray-400"><span className="font-bold">Weight:</span> {biodata?.weight}</p>
+                  <p className=" text-gray-900 dark:text-gray-400"><span className="font-bold">Age:</span> {biodata?.age}</p>
+                  <p className=" text-gray-900 dark:text-gray-400"><span className="font-bold">Occupation:</span> {biodata?.occupation}</p>
+                  <p className=" text-gray-900 dark:text-gray-400"><span className="font-bold">Race:</span> {biodata?.race}</p>
+                  <p className=" text-gray-900 dark:text-gray-400"><span className="font-bold">Father's Name:</span> {biodata?.fathersName}</p>
+                  <p className=" text-gray-900 dark:text-gray-400"><span className="font-bold">Mother's Name:</span> {biodata?.mothersName}</p>
+                  <p className="text-gray-900 dark:text-gray-400"><span className="font-bold">Permanent Address:</span> {biodata?.permanentDivision}</p>
+                  <p className="text-gray-900 dark:text-gray-400"><span className="font-bold">Present Address:</span> {biodata?.presentDivision}</p>
+                  <p className="text-gray-900 dark:text-gray-400"><span className="font-bold">Expected Partner's Age:</span> {biodata?.expectedPartner?.age}</p>
+                  <p className="text-gray-900 dark:text-gray-400"><span className="font-bold">Expected Partner's Height:</span> {biodata?.expectedPartner?.height}</p>
+                  <p className="text-gray-900 dark:text-gray-400"><span className="font-bold">Expected Partner's Weight:</span> {biodata?.expectedPartner?.weight}</p>
 
                   {/* contact email & mobile number for premium member */}
-                  <span className="text-gray-900 dark:text-gray-400">Contact Email: {biodata?.contactEmail}</span>
-                  <span className="text-gray-900 dark:text-gray-400">Phone Number: {biodata?.mobileNumber}</span>
+                  <span className="text-gray-900 dark:text-gray-400"><span className="font-bold">Contact Email:</span> {biodata?.contactEmail}</span>
+                  <span className="text-gray-900 dark:text-gray-400"><span className="font-bold">Phone Number:</span> {biodata?.mobileNumber}</span>
+                 </div>
+
                   <div className="mt-4 flex space-x-3 lg:mt-6">
                     <Link to={`/biodata/${biodata._id}`}>
                     <Button gradientDuoTone="purpleToBlue">

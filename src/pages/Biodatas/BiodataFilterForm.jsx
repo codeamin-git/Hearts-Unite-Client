@@ -20,7 +20,7 @@ const BiodataFilterForm = ({ onFilterChange }) => {
     return (
         <div>
             <h2 className="text-2xl font-semibold text-center mb-6">Filter according to your choice!</h2>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} id='myForm'>
                 <div className="mb-4">
                     <label htmlFor="biodataType" className="block text-gray-700 font-bold mb-2">Biodata Type</label>
                     <select name="biodataType" id="biodataType" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400">
@@ -55,7 +55,7 @@ const BiodataFilterForm = ({ onFilterChange }) => {
                     </select>
                 </div>
 
-                <div className="mb-4">
+                <div className="space-y-4">
                     <Button type="submit" outline gradientDuoTone='greenToBlue' className="w-full">Filter</Button>
                 </div>
             </form>

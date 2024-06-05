@@ -31,20 +31,20 @@ const EditBiodata = () => {
         const name = form.name.value;
         const profileImage = form.profileImage.value;
         const dateOfBirth = form.dateOfBirth.value;
-        const height = form.height.value;
-        const weight = form.weight.value;
-        const age = form.age.value;
+        const height = form.height.value + 'cm';
+        const weight = form.weight.value + 'kg';
+        const age = form.age.value + ' years';
         const occupation = form.occupation.value;
         const race = form.race.value;
         const fathersName = form.fathersName.value;
         const mothersName = form.mothersName.value;
         const permanentDivision = form.permanentDivision.value;
         const presentDivision = form.presentDivision.value;
-        const expectedPartnerAge = form.expectedPartnerAge.value;
-        const expectedPartnerHeightFrom = form.expectedPartnerHeightFrom.value;
-        const expectedPartnerHeightTo = form.expectedPartnerHeightTo.value;
-        const expectedPartnerWeightFrom = form.expectedPartnerWeightFrom.value;
-        const expectedPartnerWeightTo = form.expectedPartnerWeightTo.value;
+        const expectedPartnerAge = form.expectedPartnerAge.value + ' years';
+        const expectedPartnerHeightFrom = form.expectedPartnerHeightFrom.value + 'cm';
+        const expectedPartnerHeightTo = form.expectedPartnerHeightTo.value + 'cm';
+        const expectedPartnerWeightFrom = form.expectedPartnerWeightFrom.value + 'kg';
+        const expectedPartnerWeightTo = form.expectedPartnerWeightTo.value + 'kg';
         const contactEmail = form.contactEmail.value;
         const mobileNumber = form.mobileNumber.value;
         
@@ -53,7 +53,7 @@ const EditBiodata = () => {
           height: `${expectedPartnerHeightFrom}-${expectedPartnerHeightTo}`,
           weight: `${expectedPartnerWeightFrom}-${expectedPartnerWeightTo}`
         }
-        // console.log(biodataType, name, profileImage, dateOfBirth, height, weight,age, occupation, race, fathersName, mothersName, permanentDivision, presentDivision, expectedPartner, contactEmail, mobileNumber);
+        console.log(biodataType, name, profileImage, dateOfBirth, height, weight,age, occupation, race, fathersName, mothersName, permanentDivision, presentDivision, expectedPartner, contactEmail, mobileNumber);
         
         try{
           const biodata = {
