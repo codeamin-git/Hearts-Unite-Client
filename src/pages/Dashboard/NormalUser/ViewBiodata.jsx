@@ -25,22 +25,7 @@ const ViewBiodata = () => {
     // biodata premium request in modal
     const modalHandler = async () => {
       console.log('make my biodata premium');
-      // try {
-      //   const currentUser = {
-      //     email: user?.email,
-      //     role: 'premium user',
-      //     status: 'Requested',
-      //   }
-      //   const {data} = await axiosSecure.put(`${import.meta.env.VITE_API_URL}/user`, currentUser);
-      //   if(data.modifiedCount > 0){
-      //     toast.success('Requested To Make Biodata To Premium!')
-      //   } else {
-      //     toast.success('You have already requested!')
-      //   }
-      // }catch(err){
-      //   console.log(err);
-      //   toast.error(err.message)
-      // }
+      
     }
 
     if(isLoading) return <LoadingSpinner></LoadingSpinner>

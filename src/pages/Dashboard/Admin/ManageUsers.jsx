@@ -1,15 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
-import { Button, Modal, Table } from "flowbite-react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { Button, Table } from "flowbite-react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { useState } from "react";
+import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
+import toast from "react-hot-toast";
+
 const ManageUsers = () => {
-    const axiosSecure = useAxiosSecure()
-    const [openModal, setOpenModal] = useState(false);
-    const [modalAction, setModalAction] = useState('')
+    const axiosSecure = useAxiosSecure();
 
     // fetch users from usersCollection db
-    const {data: users = []} = useQuery({
+    const {data: users = [], isLoading, refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const {data} = await axiosSecure.get('/users')
@@ -17,12 +16,46 @@ const ManageUsers = () => {
         }
     })
 
-    const adminModalHandler = () => {
+    const {mutateAsync} = useMutation({
+      mutationFn: async ({email, user}) =>{
+        const {data} = await axiosSecure.patch(`/users/update/${email}`, user)
+        return data
+      },
+      onSuccess: (data) => {
+        toast.success(`User role updated!`)
+        refetch()
+        console.log(data);
+      }
+     })
+
+    const adminModalHandler = async (email) => {
         console.log('Changing status to admin');
+        const user = {
+          role: 'admin',
+        }
+        try{
+          const data = await mutateAsync({email, user})
+          console.log(data);
+        }catch(err){
+          console.log(err);
+        }
+        console.log(email);
     }
-    const premiumModalHandler = () => {
+    const premiumModalHandler = async (email) => {
         console.log('Changing status premium');
+        const user = {
+          role: 'premium member',
+        }
+        try{
+          const data = await mutateAsync({email, user})
+          console.log(data);
+        }catch(err){
+          console.log(err);
+        }
     }
+
+    if(isLoading) return <LoadingSpinner></LoadingSpinner>
+
     return (
         <div className="overflow-x-auto">
       <Table hoverable>
@@ -40,53 +73,20 @@ const ManageUsers = () => {
                 </Table.Cell>
                 <Table.Cell>{user?.email}</Table.Cell>
                 <Table.Cell>
-                    <Button gradientMonochrome="failure" className="p-0" onClick={() => 
-                        {
-                            setOpenModal(true);
-                            setModalAction('admin')
-                        }
+                    <Button gradientMonochrome="failure" className="p-0" onClick={() =>adminModalHandler(user?.email)
                     }
                     >Make Admin</Button>
                 </Table.Cell>
                 <Table.Cell>
-                <Button gradientMonochrome="lime" className="p-0" onClick={()=>{
-                    setOpenModal(true);
-                    setModalAction('premium')
-                }}>Make Premium</Button>
+                <Button gradientMonochrome="lime" className="p-0" onClick={()=>premiumModalHandler(user?.email)}>Make Premium</Button>
                 </Table.Cell>
-              </Table.Row>)
+              </Table.Row>
+            )
           }
         </Table.Body>
       </Table>
 
-      {/* modal for confirmation */}
-      <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
-        <Modal.Header />
-        <Modal.Body>
-          <div className="text-center">
-            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
-            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure to make your biodata premium?
-            </h3>
-            <div className="flex justify-center gap-4">
-              <Button outline gradientDuoTone='redToYellow' onClick={() => {
-                setOpenModal(false);
-                if(modalAction === 'admin'){
-                    adminModalHandler();
-                }
-                else if (modalAction === 'premium'){
-                    premiumModalHandler()
-                }
-              }}>
-                {"Yes, I'm sure"}
-              </Button>
-              <Button outline gradientDuoTone='pinkToOrange' onClick={() => setOpenModal(false)}>
-                No, cancel
-              </Button>
-            </div>
-          </div>
-        </Modal.Body>
-      </Modal>
+      
     </div>
     );
 };
