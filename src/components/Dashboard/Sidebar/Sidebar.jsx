@@ -1,9 +1,10 @@
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../../public/HeartsUnite.png'
-import { FaEdit, FaStreetView } from "react-icons/fa";
-import { MdFavorite, MdPermContactCalendar } from "react-icons/md";
+import { FaEdit, FaStreetView, FaUserCheck, FaUsers } from "react-icons/fa";
+import { MdFavorite, MdPermContactCalendar, MdAdminPanelSettings, MdOutlineContactPhone } from "react-icons/md";
 import { Button } from 'flowbite-react';
 import useAuth from '../../../../hooks/useAuth';
+
 
 const Sidebar = () => {
     const {logOut} = useAuth();
@@ -24,7 +25,8 @@ const Sidebar = () => {
                 </div>
                 </Link>
             </div>
-            {/* menu items */}
+
+            {/* user dashboard routes */}
             <ul className='mt-6 space-y-4'>
                 <li className='flex items-center gap-2'>
                     <FaEdit></FaEdit>
@@ -41,6 +43,28 @@ const Sidebar = () => {
                 <li className='flex items-center gap-2'>
                 <MdFavorite />
                     <NavLink to='/dashboard/favouritesBiodata' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'}>Favourites Biodata </NavLink>
+                </li>
+            </ul>
+
+            <div className='divide-red-500'></div>
+
+            {/* admin dashboard routes */}
+            <ul className='mt-6 space-y-4'>
+                <li className='flex items-center gap-2'>
+                    <MdAdminPanelSettings />
+                    <NavLink to='/dashboard/adminDashboard' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'}>Admin Dashboard</NavLink>
+                </li>
+                <li className='flex items-center gap-2'>
+                    <FaUsers></FaUsers>
+                    <NavLink to='/dashboard/manageUsers' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'}>Manage Users</NavLink>
+                </li>
+                <li className='flex items-center gap-2'>
+                <FaUserCheck />
+                    <NavLink to='/dashboard/approvedPremium' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'}>Approved Premium</NavLink>
+                </li>
+                <li className='flex items-center gap-2'>
+                <MdOutlineContactPhone />
+                    <NavLink to='/dashboard/approvedContactRequest' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'}>Approved Contact Request</NavLink>
                 </li>
             </ul>
             </div>
