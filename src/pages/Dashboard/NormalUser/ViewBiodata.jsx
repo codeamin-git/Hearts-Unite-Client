@@ -3,12 +3,17 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
-import { Button, Card } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Button, Card, Modal } from "flowbite-react";
+import { useState } from "react";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
+import toast from 'react-hot-toast'
 
 const ViewBiodata = () => {
     const {user} = useAuth();
     const axiosSecure = useAxiosSecure();
+    const [openModal, setOpenModal] = useState(false);
+
+    // fetching biodatas of one user by email
     const { data: biodatas = [], isLoading } = useQuery({
         queryKey: ['viewBiodata', user?.email],
         queryFn: async () => {
@@ -16,6 +21,27 @@ const ViewBiodata = () => {
             return data;
         }
     });
+
+    // biodata premium request in modal
+    const modalHandler = async () => {
+      console.log('make my biodata premium');
+      // try {
+      //   const currentUser = {
+      //     email: user?.email,
+      //     role: 'premium user',
+      //     status: 'Requested',
+      //   }
+      //   const {data} = await axiosSecure.put(`${import.meta.env.VITE_API_URL}/user`, currentUser);
+      //   if(data.modifiedCount > 0){
+      //     toast.success('Requested To Make Biodata To Premium!')
+      //   } else {
+      //     toast.success('You have already requested!')
+      //   }
+      // }catch(err){
+      //   console.log(err);
+      //   toast.error(err.message)
+      // }
+    }
 
     if(isLoading) return <LoadingSpinner></LoadingSpinner>
 
@@ -55,11 +81,32 @@ const ViewBiodata = () => {
                  </div>
 
                   <div className="mt-4 flex space-x-3 lg:mt-6">
-                    <Link to={`/biodata/${biodata._id}`}>
-                    <Button gradientDuoTone="purpleToBlue">
-                      Make Biodata to Premium
-                    </Button>
-                    </Link>
+
+                  <Button outline gradientDuoTone="purpleToPink" onClick={() => setOpenModal(true)}>Make Biodata To Premium</Button>
+      <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Are you sure to make your biodata premium?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button outline gradientDuoTone='redToYellow' onClick={() => {
+                setOpenModal(false);
+                modalHandler()
+              }
+              }>
+                {"Yes, I'm sure"}
+              </Button>
+              <Button outline gradientDuoTone='pinkToOrange' onClick={() => setOpenModal(false)}>
+                No, cancel
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+
                   </div>
                 </div>
               </Card>)
