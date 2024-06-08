@@ -3,9 +3,11 @@ import useAuth from '../../../../hooks/useAuth'
 import logo from '../../../../public/HeartsUnite.png'
 
 import { Button, Navbar } from "flowbite-react";
+import useRole from '../../../../hooks/useRole';
 
 const Nav = () => {
   const { user, logOut } = useAuth();
+  const [role] = useRole()
 
   const handleLogout = () => {
     logOut()
@@ -22,7 +24,7 @@ const Nav = () => {
       <Link to='/contactUs'><Navbar.Link>Contact us</Navbar.Link></Link>
 
       {
-        user && <Link to='/dashboard'><Navbar.Link>Dashboard</Navbar.Link></Link>
+        user && role==='normal user' || role==='premium member' ? <Link to='/dashboard/editBiodata'><Navbar.Link>Dashboard</Navbar.Link></Link> : <Link to='/dashboard/adminDashboard'><Navbar.Link>Dashboard</Navbar.Link></Link>
       }
   </>
 

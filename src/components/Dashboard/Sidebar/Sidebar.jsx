@@ -1,7 +1,5 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../../../../public/HeartsUnite.png'
-import { FaEdit, FaStreetView, FaUserCheck, FaUsers } from "react-icons/fa";
-import { MdFavorite, MdPermContactCalendar, MdAdminPanelSettings, MdOutlineContactPhone } from "react-icons/md";
 import { Button } from 'flowbite-react';
 import useAuth from '../../../../hooks/useAuth';
 import useRole from '../../../../hooks/useRole';
@@ -31,12 +29,10 @@ const Sidebar = () => {
                 </Link>
             </div>
 
-            {/* user sidebar menu */}
-            {role === 'normal user' && 
+            {/* normal sidebar menu */}
+            {role === 'normal user' || role === 'premium member' && 
             <UsersMenu></UsersMenu>
             }
-
-            
 
             {/* admin sidebar menu */}
             {

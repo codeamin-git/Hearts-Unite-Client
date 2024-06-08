@@ -2,14 +2,18 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "flowbite-react";
 import { GiLoveMystery } from "react-icons/gi";
 import { TbInfoTriangle } from "react-icons/tb";
+import useRole from "../../../hooks/useRole";
+import toast from 'react-hot-toast'
 
 const SingleBiodataDetails = () => {
+    const [role] = useRole();
     const {id} = useParams()
-    const axiosSecure = useAxiosSecure()
+    const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate()
 
     const {data: biodata = {}, isLoading}= useQuery({
         queryKey: ['biodata', id],
@@ -18,6 +22,27 @@ const SingleBiodataDetails = () => {
             return data
         }
     })
+
+    const handleFavBiodata = async (biodata) => {
+        const favBiodata = {
+            name: biodata.name,
+            biodataId: biodata.biodataId,
+            permanentAddress: biodata.permanentDivision,
+            occupation: biodata.occupation
+        }
+        try{
+            const {data} = await axiosSecure.post('/favBiodata', favBiodata)
+            console.log(data);
+            if(data.insertedId){
+                toast.success('Biodata Added to Favorite Biodata!')
+                navigate('/dashboard/favouritesBiodata')
+            }
+
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     if(isLoading) return <LoadingSpinner></LoadingSpinner>
     return (
         <div>
@@ -54,22 +79,28 @@ const SingleBiodataDetails = () => {
                   <p className="text-gray-900 dark:text-gray-400"><span className="font-bold">Expected Partner's Age:</span> {biodata?.expectedPartner?.age}</p>
                   <p className="text-gray-900 dark:text-gray-400"><span className="font-bold">Expected Partner's Height:</span> {biodata?.expectedPartner?.height}</p>
                   <p className="text-gray-900 dark:text-gray-400"><span className="font-bold">Expected Partner's Weight:</span> {biodata?.expectedPartner?.weight}</p>
-            </div>
 
-            {/* TODO: premium user can see contactEmail and phone number here */}
-
-			<div className="flex flex-col gap-4 mt-4">
-               <Button outline gradientDuoTone='purpleToPink'>
+                  <div className="flex flex-col gap-4 mt-4">
+            {role === 'premium member' && 
+            <>
+            <p className="text-gray-900 dark:text-gray-400"><span className="font-bold">Contact Email:</span> {biodata?.contactEmail}</p>
+            <p className="text-gray-900 dark:text-gray-400"><span className="font-bold">Contact Number:</span> {biodata?.mobileNumber}</p>
+            </>
+            }
+                {
+                    role === 'normal user' && <Button outline gradientDuoTone='greenToBlue'>
+                    <TbInfoTriangle className="mr-2 text-xl text-yellow-300"/>
+                        Request Contact Information
+                    </Button>
+                }
+               <Button onClick={() => handleFavBiodata(biodata)} outline gradientDuoTone='purpleToPink'>
                <GiLoveMystery  className="text-pink-400 text-2xl mr-2"/>
                Add to Favourites
                </Button>
+            </div>
 
-                <Button outline gradientDuoTone='greenToBlue'>
-                <TbInfoTriangle className="mr-2 text-xl text-yellow-300"/>
-                    Request Contact Information
-                </Button>
             </div>
-            </div>
+          </div>
 		</div>
 	</div>
 </section>

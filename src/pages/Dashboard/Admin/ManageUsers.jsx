@@ -3,9 +3,11 @@ import { Button, Table } from "flowbite-react";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
 import toast from "react-hot-toast";
+import useAuth from "../../../../hooks/useAuth";
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
+    const {user: loggedInUser} = useAuth()
 
     // fetch users from usersCollection db
     const {data: users = [], isLoading, refetch} = useQuery({
@@ -29,6 +31,9 @@ const ManageUsers = () => {
      })
 
     const adminModalHandler = async (email) => {
+        if(loggedInUser.email === email){
+          return toast.error('Action Not Allowed!')
+        }
         console.log('Changing status to admin');
         const user = {
           role: 'admin',
@@ -42,6 +47,9 @@ const ManageUsers = () => {
         console.log(email);
     }
     const premiumModalHandler = async (email) => {
+      if(loggedInUser.email === email){
+        return toast.error('Action Not Allowed!')
+      }
         console.log('Changing status premium');
         const user = {
           role: 'premium member',
