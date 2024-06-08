@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "flowbite-react";
 import { GiLoveMystery } from "react-icons/gi";
 import { TbInfoTriangle } from "react-icons/tb";
@@ -42,6 +42,8 @@ const SingleBiodataDetails = () => {
             console.log(err);
         }
     }
+
+    
 
     if(isLoading) return <LoadingSpinner></LoadingSpinner>
     return (
@@ -88,10 +90,14 @@ const SingleBiodataDetails = () => {
             </>
             }
                 {
-                    role === 'normal user' && <Button outline gradientDuoTone='greenToBlue'>
+                    role === 'normal user' && <div className="w-full">
+                        <Link to={`/checkout/${biodata.biodataId}`}>
+                    <Button outline gradientDuoTone='greenToBlue' className="w-full">
                     <TbInfoTriangle className="mr-2 text-xl text-yellow-300"/>
                         Request Contact Information
                     </Button>
+                    </Link>
+                    </div>
                 }
                <Button onClick={() => handleFavBiodata(biodata)} outline gradientDuoTone='purpleToPink'>
                <GiLoveMystery  className="text-pink-400 text-2xl mr-2"/>

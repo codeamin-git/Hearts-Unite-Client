@@ -21,7 +21,8 @@ import AdminDashboard from "../pages/Dashboard/Admin/AdminDashboard";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import ApprovedPremium from "../pages/Dashboard/Admin/ApprovedPremium";
 import ApprovedContactRequest from "../pages/Dashboard/Admin/ApprovedContactRequest";
-
+import PaymentPage from "../pages/PaymentPage/PaymentPage";
+import CheckoutForm from "../pages/PaymentPage/CheckoutForm";
   
   export const router = createBrowserRouter([
         {
@@ -40,6 +41,10 @@ import ApprovedContactRequest from "../pages/Dashboard/Admin/ApprovedContactRequ
             {
               path: '/biodata/:id',
               element: <PrivateRoute><SingleBiodataDetails></SingleBiodataDetails></PrivateRoute>
+            },
+            {
+              path: '/checkout/:biodataId',
+              element: <PrivateRoute><PaymentPage></PaymentPage></PrivateRoute>
             },
             {
               path: '/aboutUs',

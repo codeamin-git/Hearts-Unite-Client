@@ -23,9 +23,17 @@ const Nav = () => {
       <Link to='/aboutUs'><Navbar.Link>About us</Navbar.Link></Link>
       <Link to='/contactUs'><Navbar.Link>Contact us</Navbar.Link></Link>
 
-      {
-        user && role==='normal user' || role==='premium member' ? <Link to='/dashboard/editBiodata'><Navbar.Link>Dashboard</Navbar.Link></Link> : <Link to='/dashboard/adminDashboard'><Navbar.Link>Dashboard</Navbar.Link></Link>
-      }
+      {user ? (
+  role === 'normal user' || role === 'premium member' ? (
+    <Link to='/dashboard/editBiodata'>
+      <Navbar.Link>Dashboard</Navbar.Link>
+    </Link>
+  ) : (
+    <Link to='/dashboard/adminDashboard'>
+      <Navbar.Link>Dashboard</Navbar.Link>
+    </Link>
+  )
+) : null}
   </>
 
   return (

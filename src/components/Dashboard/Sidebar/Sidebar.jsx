@@ -30,8 +30,12 @@ const Sidebar = () => {
             </div>
 
             {/* normal sidebar menu */}
-            {role === 'normal user' || role === 'premium member' && 
+            {role === 'normal user' &&
             <UsersMenu></UsersMenu>
+            }
+            {
+                role === 'premium member' && 
+                <UsersMenu></UsersMenu>
             }
 
             {/* admin sidebar menu */}
