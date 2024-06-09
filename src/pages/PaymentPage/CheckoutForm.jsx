@@ -4,18 +4,20 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import { ImSpinner9 } from 'react-icons/im';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import './CheckoutForm.css';
 import { Button } from 'flowbite-react';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState('');
 const [cardError, setCardError]=useState('')
-const [processing, setProcessing] = useState(false)
+const [processing, setProcessing] = useState(false);
+const navigate = useNavigate()
   useEffect(()=>{
     // fetch client secret
     getClientSecret({price: 5})
@@ -30,26 +32,18 @@ const [processing, setProcessing] = useState(false)
   const {user, loading} = useAuth();
   const params = useParams()
   const axiosSecure = useAxiosSecure()
-  const {data: biodata = '', refetch, isLoading} = useQuery({
+  const {data: biodata = '', isLoading} = useQuery({
       queryKey: ['biodataId'],
       queryFn: async () => {
           const {data} = await axiosSecure(`/checkout/${params.biodataId}`)
           return data
       }
       })
-  console.log(biodata);
-
 
   const handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
     setProcessing(true)
-
-    // biodata info TODO ****************
-    const form = event.target;
-    const biodataId = form.biodataId.value;
-    const requesterEmail = form.email.value;
-    console.log(biodataId, requesterEmail);
 
     if (!stripe || !elements) {
       return;
@@ -95,7 +89,24 @@ const [processing, setProcessing] = useState(false)
 
     if(paymentIntent.status === 'succeeded'){
         // 1. create payment info object
+        const paymentInfo = {
+          ...biodata,
+          requestedId: biodata._id,
+          transactionId: paymentIntent.id,
+          requestStatus: 'Pending',
+          requester: user?.email,
+        }
+        delete paymentInfo._id;
         // 2. save payment info in request collection
+        try {
+          const {data} = await axiosSecure.post('/contactReqs', paymentInfo)
+          console.log(data);
+
+          toast.success('Successfully paid for this contact information!')
+          navigate('/dashboard/myContactRequest')
+        }catch(err){
+          console.log(err);
+        }
     }
 
     setProcessing(false)
