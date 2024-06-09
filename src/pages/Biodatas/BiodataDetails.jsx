@@ -17,7 +17,7 @@ const BiodataDetails = ({biodata}) => {
         <span className="text-sm text-gray-500 dark:text-gray-400">Occupation: {biodata.occupation}</span>
         <div className="mt-4 flex space-x-3 lg:mt-6">
           <Link to={`/biodata/${biodata._id}`}>
-          <Button gradientDuoTone="purpleToPink">
+          <Button outline gradientDuoTone="purpleToPink">
             View Profile
           </Button>
           </Link>
