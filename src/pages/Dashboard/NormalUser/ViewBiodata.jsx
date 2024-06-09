@@ -23,9 +23,19 @@ const ViewBiodata = () => {
     });
 
     // biodata premium request in modal
-    const modalHandler = async () => {
-      console.log('make my biodata premium');
-      
+    const makePremium = async (id) => {
+      try{
+        const {data} = await axiosSecure.patch(`/biodata/${id}`)
+      console.log(data);
+      if(data.modifiedCount > 0){
+        toast.success('Requested to make this biodata to premium!')
+      }
+      if(data.modifiedCount === 0){
+        toast.success('Wait for admin approval.')
+      }
+      }catch(err){
+        console.log(err);
+      }
     }
 
     if(isLoading) return <LoadingSpinner></LoadingSpinner>
@@ -79,7 +89,7 @@ const ViewBiodata = () => {
             <div className="flex justify-center gap-4">
               <Button outline gradientDuoTone='redToYellow' onClick={() => {
                 setOpenModal(false);
-                modalHandler()
+                makePremium(biodata?._id)
               }
               }>
                 {"Yes, I'm sure"}
