@@ -23,7 +23,7 @@ const MyContactRequest = () => {
             const {data} = await axiosSecure.delete(`/contactReqs/${id}`)
             console.log(data);
             if(data.deletedCount > 0){
-                toast.success('Biodata Deleted Successfully from Favorite Biodatas!')
+                toast.success('Biodata Deleted Successfully from My Contact Requests!')
                 refetch()
             }
         }catch(err){

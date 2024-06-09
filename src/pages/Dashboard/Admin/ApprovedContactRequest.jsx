@@ -18,16 +18,16 @@ const ApprovedContactRequest = () => {
     })
 console.log(biodatas);
     const handleApprove = async id =>{
-        // try{
-        //     const {data} = await axiosSecure.delete(`/favBiodata/${id}`)
-        //     console.log(data);
-        //     if(data.deletedCount > 0){
-        //         toast.success('Biodata Deleted Successfully from Favorite Biodatas!')
-        //         refetch()
-        //     }
-        // }catch(err){
-        //     console.log(err);
-        // }
+        try{
+            const {data} = await axiosSecure.patch(`/contactReqs/${id}`)
+            console.log(data);
+            if(data.modifiedCount > 0){
+                toast.success('Contact request provided!')
+                refetch()
+            }
+        }catch(err){
+            console.log(err);
+        }
         console.log(id);
     }
     if(isLoading) return <LoadingSpinner />
