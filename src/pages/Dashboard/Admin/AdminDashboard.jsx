@@ -12,7 +12,7 @@ const AdminDashboard = () => {
     const {data: statData = {}, isLoading} = useQuery({
         queryKey: ['statData'],
         queryFn: async()=>{
-            const {data} = await axiosSecure.get('/adminDashboard')
+            const {data} = await axiosSecure.get('/admin-stat')
             return data;
         }
     })

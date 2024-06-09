@@ -4,19 +4,25 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
 import toast from "react-hot-toast";
 import useAuth from "../../../../hooks/useAuth";
+import { useState } from "react";
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
     const {user: loggedInUser} = useAuth()
+    const [searchQuery, setSearchQuery] = useState('');
 
     // fetch users from usersCollection db
-    const {data: users = [], isLoading, refetch} = useQuery({
-        queryKey: ['users'],
-        queryFn: async () => {
-            const {data} = await axiosSecure.get('/users')
-            return data
-        }
-    })
+    const { data: users = [], isLoading, refetch } = useQuery({
+      queryKey: ['users', searchQuery],
+      queryFn: async ({ queryKey }) => {
+          const [, query] = queryKey;
+          const { data } = await axiosSecure.get(`/users`, {
+              params: { username: query }
+          });
+          return data;
+      },
+      enabled: true // Disable the query if there is no search query
+  });
 
     const {mutateAsync} = useMutation({
       mutationFn: async ({email, user}) =>{
@@ -62,10 +68,33 @@ const ManageUsers = () => {
         }
     }
 
+  const handleSearchChange = (event) => {
+    event.preventDefault()
+    const form = event.target
+    const value = form.search.value;
+    setSearchQuery(value)
+    refetch()
+};
+
     if(isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
-        <div className="overflow-x-auto">
+        <div>
+
+<div className="mb-4">
+<form onSubmit={handleSearchChange} className="max-w-md flex items-center">
+<input
+                type="text"
+                name='search'
+                placeholder="Search by username"
+                className="border-r-0"
+            />
+            <Button type="submit" outline gradientDuoTone='cyanToBlue' className="border-l-0">Search</Button>
+</form>
+
+    </div>
+
+          <div className="overflow-x-auto">
       <Table hoverable>
         <Table.Head>
           <Table.HeadCell>User Name</Table.HeadCell>
@@ -96,6 +125,7 @@ const ManageUsers = () => {
 
       
     </div>
+        </div>
     );
 };
 
