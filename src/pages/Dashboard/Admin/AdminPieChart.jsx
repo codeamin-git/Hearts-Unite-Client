@@ -1,6 +1,6 @@
 import { PieChart, Pie, Cell, Legend} from 'recharts';
 
-const COLORS = ['#00C49F','#0088FE', 'pink', '#FF8042', 'gold'];
+const COLORS = ['#9f53e5','#4CAF50', '#1E90FF', '#FF69B4', '#FB923C'];
 
 const AdminPieChart = ({statData}) => {
     const data = [

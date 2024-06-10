@@ -12,6 +12,7 @@ const ViewBiodata = () => {
     const {user} = useAuth();
     const axiosSecure = useAxiosSecure();
     const [openModal, setOpenModal] = useState(false);
+    const [clickedId, setClickedId] = useState('')
 
     // fetching biodatas of one user by email
     const { data: biodatas = [], isLoading } = useQuery({
@@ -22,16 +23,20 @@ const ViewBiodata = () => {
         }
     });
 
+    // console.log(biodatas);
+
     // biodata premium request in modal
     const makePremium = async (id) => {
       try{
-        const {data} = await axiosSecure.patch(`/biodata/${id}`)
+        const {data} = await axiosSecure.patch(`/biodata/${id}`, {
+          biodataStatus: 'Requested'
+        })
       console.log(data);
       if(data.modifiedCount > 0){
         toast.success('Requested to make this biodata to premium!')
       }
-      if(data.modifiedCount === 0){
-        toast.success('Wait for admin approval.')
+      else if(data.matchedCount>0){
+        toast.success('Wait for admin approval.👊')
       }
       }catch(err){
         console.log(err);
@@ -77,7 +82,10 @@ const ViewBiodata = () => {
 
                   <div className="mt-4 flex space-x-3 lg:mt-6">
 
-                  <Button outline gradientDuoTone="purpleToPink" onClick={() => setOpenModal(true)}>Make Biodata To Premium</Button>
+                  <Button outline gradientDuoTone="purpleToPink" onClick={() => {
+                    setOpenModal(true)
+                    setClickedId(biodata?._id)
+                  }}>Make Biodata To Premium</Button>
       <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
         <Modal.Header />
         <Modal.Body>
@@ -88,10 +96,9 @@ const ViewBiodata = () => {
             </h3>
             <div className="flex justify-center gap-4">
               <Button outline gradientDuoTone='redToYellow' onClick={() => {
-                setOpenModal(false);
-                makePremium(biodata?._id)
-              }
-              }>
+                setOpenModal(false)
+                makePremium(clickedId)
+              }}>
                 {"Yes, I'm sure"}
               </Button>
               <Button outline gradientDuoTone='pinkToOrange' onClick={() => setOpenModal(false)}>

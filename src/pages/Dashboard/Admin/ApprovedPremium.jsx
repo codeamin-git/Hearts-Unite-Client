@@ -10,10 +10,11 @@ const ApprovedPremium = () => {
     const {data: biodatas = [], refetch, isLoading} = useQuery({
         queryKey: ['makePremium'],
         queryFn: async () => {
-            const {data} = await axiosSecure.get('/biodatas')
-            const premiumReq = data.filter((req)=> req.biodataStatus === 'Requested')
-            console.log(premiumReq);
-            return premiumReq;
+            const {data} = await axiosSecure.get('/allPremiumReq')
+            // const premiumReq = data.filter((req)=> req.biodataStatus === 'Requested')
+            // console.log(premiumReq);
+            // return premiumReq;
+            return data
         }
     })
 
