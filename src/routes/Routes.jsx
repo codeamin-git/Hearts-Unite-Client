@@ -23,6 +23,7 @@ import ApprovedPremium from "../pages/Dashboard/Admin/ApprovedPremium";
 import ApprovedContactRequest from "../pages/Dashboard/Admin/ApprovedContactRequest";
 import PaymentPage from "../pages/PaymentPage/PaymentPage";
 import CheckoutForm from "../pages/PaymentPage/CheckoutForm";
+import GotMarried from "../pages/Dashboard/NormalUser/GotMarried";
   
   export const router = createBrowserRouter([
         {
@@ -84,6 +85,10 @@ import CheckoutForm from "../pages/PaymentPage/CheckoutForm";
             {
               path: 'favouritesBiodata',
               element: <FavouritesBiodata></FavouritesBiodata>
+            },
+            {
+              path: 'gotMarried',
+              element: <GotMarried></GotMarried>
             },
 
             // admin dashboard routes

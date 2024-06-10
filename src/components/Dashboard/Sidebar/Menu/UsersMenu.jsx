@@ -1,6 +1,7 @@
 import { FaEdit, FaStreetView } from "react-icons/fa";
 import { MdFavorite, MdPermContactCalendar } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import { PiCheersDuotone } from "react-icons/pi";
 
 const UsersMenu = () => {
     return (
@@ -21,6 +22,10 @@ const UsersMenu = () => {
                 <li className='flex items-center gap-2'>
                 <MdFavorite />
                     <NavLink to='/dashboard/favouritesBiodata' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'}>Favourites Biodata </NavLink>
+                </li>
+                <li className='flex items-center gap-2'>
+                <PiCheersDuotone />
+                    <NavLink to='/dashboard/gotMarried' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'}>Got Married </NavLink>
                 </li>
             </ul> 
         </>

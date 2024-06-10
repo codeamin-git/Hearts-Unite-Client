@@ -87,7 +87,7 @@ const ManageUsers = () => {
                 type="text"
                 name='search'
                 placeholder="Search by username"
-                className="border-r-0"
+                className="border-r-0 rounded-lg"
             />
             <Button type="submit" outline gradientDuoTone='cyanToBlue' className="border-l-0">Search</Button>
 </form>
