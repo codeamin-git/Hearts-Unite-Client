@@ -1,5 +1,5 @@
 import { FaUserCheck, FaUsers } from "react-icons/fa";
-import { MdAdminPanelSettings, MdOutlineContactPhone } from "react-icons/md";
+import { MdAdminPanelSettings, MdOutlineContactPhone, MdOutlineCelebration } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 
 const AdminMenu = () => {
@@ -21,6 +21,10 @@ const AdminMenu = () => {
                 <li className="flex items-center gap-2">
                 <MdOutlineContactPhone />
                     <NavLink to='/dashboard/approvedContactRequest' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'} >Approved Contact Request</NavLink>
+                </li>
+                <li className="flex items-center gap-2">
+                <MdOutlineCelebration />
+                    <NavLink to='/dashboard/success-stories' className={({isActive}) => isActive ? 'text-xl font bold bg-blue-500 w-full': 'text-xl'} >Success Stories</NavLink>
                 </li>
             </ul>
         </>

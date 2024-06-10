@@ -24,6 +24,7 @@ import ApprovedContactRequest from "../pages/Dashboard/Admin/ApprovedContactRequ
 import PaymentPage from "../pages/PaymentPage/PaymentPage";
 import CheckoutForm from "../pages/PaymentPage/CheckoutForm";
 import GotMarried from "../pages/Dashboard/NormalUser/GotMarried";
+import SuccessStories from "../pages/Dashboard/Admin/SuccessStories";
   
   export const router = createBrowserRouter([
         {
@@ -107,6 +108,10 @@ import GotMarried from "../pages/Dashboard/NormalUser/GotMarried";
             {
               path: 'approvedContactRequest',
               element: <ApprovedContactRequest></ApprovedContactRequest>
+            },
+            {
+              path: 'success-stories',
+              element: <SuccessStories></SuccessStories>
             },
           ]
         }
