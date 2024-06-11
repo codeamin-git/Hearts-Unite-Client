@@ -5,15 +5,17 @@ import { LiaMaleSolid } from "react-icons/lia";
 import { LuHeartHandshake } from "react-icons/lu";
 
 const SuccessCounter = () => {
-    const [counts, setCounts] = useState(null)
+    const [counts, setCounts] = useState({})
     useEffect(()=>{
-        fetch('http://localhost:5000/admin-stat')
+        fetch(`${import.meta.env.VITE_API_URL}/admin-stat`)
         .then(res => res.json())
         .then(data => setCounts(data))
     }, [])
     console.log(counts);
     return (
-        <div className="mt-12 border border-maroon border-r-0 border-l-0 flex items-center justify-center flex-col md:flex-row mx-12 gap-8 uppercase">
+        <div>
+            <h2 className='text-4xl font-medium my-6 text-center'>~Our Engagements~</h2>
+            <div className="mt-12 border border-maroon border-r-0 border-l-0 flex items-center justify-center flex-col md:flex-row mx-12 gap-8 uppercase">
             <div className=" md:border-r border-maroon flex flex-col items-center justify-center space-y-4 p-8">
                 <IoPeopleSharp className='text-3xl'/>
                 <h2 className='text-navy font-semibold text-xl'>Total Biodata</h2>
@@ -35,6 +37,7 @@ const SuccessCounter = () => {
                 <p className='text-2xl font-medium'>{counts?.totalMarriage}</p>
             </div>
         
+        </div>
         </div>
     );
 };

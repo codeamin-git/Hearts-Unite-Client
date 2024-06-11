@@ -3,6 +3,7 @@ import Banner from '../Banner/Banner';
 import PremiumMember from '../PremiumMember/PremiumMember';
 import HowItWorks from '../HowItWorks/HowItWorks';
 import SuccessCounter from '../SuccessCounter/SuccessCounter';
+import MarriageStories from '../MarriageStories/MarriageStories';
 const Home = () => {
     return (
         <div className='bg-ivory bg-opacity-25'>
@@ -24,6 +25,10 @@ const Home = () => {
             {/* success counter section */}
             <div>
                 <SuccessCounter></SuccessCounter>
+            </div>
+            {/* success stories section */}
+            <div className='flex items-center justify-center'>
+                <MarriageStories></MarriageStories>
             </div>
 
         </div>

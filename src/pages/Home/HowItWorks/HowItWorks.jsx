@@ -2,6 +2,7 @@ import './HowItWorks.css'
 const HowItWorks = () => {
     return (
         <div className="flex flex-col items-center mt-6">
+            <h2 className='text-4xl font-medium my-6'>~How It Works~</h2>
             {/* First step */}
             <div className="flex gap-8 max-w-md">
                 {/* Left Side - Image */}
