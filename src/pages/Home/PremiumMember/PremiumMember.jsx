@@ -3,7 +3,8 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
 import { Button } from "flowbite-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useScramble } from "use-scramble";
 
 const PremiumMember = () => {
     const axiosSecure = useAxiosSecure()
@@ -41,13 +42,33 @@ const PremiumMember = () => {
   const handleSortChange = (e) => {
       setSortOrder(e.target.value);
   };
+
+  const {ref, replay} = useScramble({
+    text: "Premium Member",
+    speed: 0.6,
+    tick: 1,
+    step: 1,
+    scramble: 10,
+    seed: 0,
+  })
+
+  useEffect(() => {
+    // Autoplay after few seconds
+    const autoplayTimeout = setTimeout(() => {
+      replay();
+    }, 4000);
+
+    // Clean up the timeout when the component unmounts
+    return () => clearTimeout(autoplayTimeout);
+  }, []);
+
     if(isLoading) return <LoadingSpinner />
     return (
         <div>
           {/* premium section heading */}
           <div className="mb-4 flex justify-between">
             <div>
-                <p className="text-3xl font-medium">These are some of out <span className="text-pink-400 font-bold text-4xl">Premium Biodatas</span> <br /> You can have a look!</p>
+                <p className="text-3xl font-medium">These are some of out <span ref={ref} onMouseOver={replay} onMouseEnter={replay} className="text-pink-400 font-bold text-4xl"></span> <br /> You can have a look!</p>
             </div>
                 <div>
                 <label htmlFor="sortOrder" className="block text-gray-700 font-bold mb-2">
