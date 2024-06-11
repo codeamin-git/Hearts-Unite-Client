@@ -2,9 +2,10 @@ import {Helmet} from 'react-helmet-async'
 import Banner from '../Banner/Banner';
 import PremiumMember from '../PremiumMember/PremiumMember';
 import HowItWorks from '../HowItWorks/HowItWorks';
+import SuccessCounter from '../SuccessCounter/SuccessCounter';
 const Home = () => {
     return (
-        <div>
+        <div className='bg-ivory bg-opacity-25'>
             <Helmet>
                 <title>HeartsUnite | Home</title>
             </Helmet>
@@ -17,8 +18,12 @@ const Home = () => {
             <PremiumMember></PremiumMember>
             </div>
             {/* how it works section */}
-            <div className='flex items-center justify-center w-full bg-ivory'>
+            <div className='flex items-center justify-center w-full'>
             <HowItWorks></HowItWorks>
+            </div>
+            {/* success counter section */}
+            <div>
+                <SuccessCounter></SuccessCounter>
             </div>
 
         </div>

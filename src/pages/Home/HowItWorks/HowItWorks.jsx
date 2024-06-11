@@ -65,7 +65,7 @@ const HowItWorks = () => {
                 <div className="w-1/2 p-4">
                     <h3 className="text-3xl font-medium">Get Profile Information</h3>
                     <p className='text-pink-500 mb-2 font-medium'>Hurry Up!</p>
-                    <p className="text-gray-600">Learn more about your potential match. View their detailed profile, including personal information, family background, education, career, and lifestyle. Make informed decisions based on shared interests and compatibility.</p>
+                    <p className="text-gray-600">Learn more about your potential match. View their detailed profile, including personal information, family background, education, career, and lifestyle.</p>
                 </div>
                 {/* Vertical Divider */}
                 <div className="relative w-px bg-maroon h-96">

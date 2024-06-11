@@ -5,6 +5,7 @@ import { Button } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useScramble } from "use-scramble";
+import { SlSymbolMale, SlSymbleFemale } from "react-icons/sl";
 
 const PremiumMember = () => {
     const axiosSecure = useAxiosSecure()
@@ -91,10 +92,11 @@ const PremiumMember = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {
                     sortedBiodatas().map(biodata => 
-                      <div key={biodata?._id} className="max-w-md shadow-lg dark:bg-gray-50 dark:text-gray-800 flex flex-col">
+                      <div key={biodata?._id} className="max-w-md shadow-lg dark:bg-gray-50 dark:text-gray-800 flex flex-col relative">
                       <img src={biodata?.profileImage} alt="" className="object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500" />
                       <div className="flex flex-col justify-between p-6 space-y-4 flex-1 bg-pink-50">
                         <div className="space-y-2">
+                          <h2 className="text-2xl font-semibold tracking-wide absolute top-0 right-0">{biodata?.biodataType === "Male" ? <><p className="flex items-center gap-2 bg-ivory px-2 border-b-rounded-xl">Male <SlSymbolMale className="text-purple-500"/></p></> : <><p className="flex items-center gap-2 bg-blush px-2">Female <SlSymbleFemale className="text-pink-400"/></p></>}</h2>
                           <h2 className="text-2xl font-semibold tracking-wide">Biodata ID: {biodata?.biodataId}</h2>
                           <h2 className="text-3xl font-semibold tracking-wide">{biodata?.name}</h2>
                           <p className="dark:text-gray-800 text-xl"><span className="font-semibold">Permanent Division:</span> {biodata?.permanentDivision}</p>
