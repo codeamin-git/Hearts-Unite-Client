@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const BiodataDetails = ({biodata}) => {
     return (
         <div>
-            <Card className="max-w-sm">
+            <Card className="max-w-sm bg-purple-50">
       <div className="flex flex-col items-center pb-4">
         <img
           src={biodata.profileImage}

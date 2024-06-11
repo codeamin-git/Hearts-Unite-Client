@@ -66,7 +66,7 @@ const Biodatas = () => {
                 <BiodataFilterForm onFilterChange={handleFilterChange} />
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 flex-1 md:ml-8 p-2 gap-6">
+            <div className="grid md:grid-cols-2 flex-1 md:ml-8 p-2 gap-6">
                 {filteredBiodatas.map(biodata => (
                     <BiodataDetails key={biodata._id} biodata={biodata} />
                 ))}

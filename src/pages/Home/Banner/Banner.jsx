@@ -7,7 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import { EffectFade, Autoplay, Pagination, Navigation } from 'swiper/modules';
-
+import './Banner.css'
 const Banner = () => {
     return (
         <div className='w-full relative'>
@@ -39,9 +39,8 @@ const Banner = () => {
         <SwiperSlide>
           <img src="https://i.ibb.co/YP103Dx/banner-3.jpg" className='w-full overflow-hidden h-[700px]' style={{objectFit: 'cover'}}/>
         </SwiperSlide>
-       
-
       </Swiper>
+      
       <div className='bg-gradient-to-b from-[#1f1f1f] via-transparent to-[#1f1f1f] w-full h-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex items-center justify-center'>
         <div className='bg-purple-400 bg-opacity-10 rounded-full flex flex-col items-center text-white p-2'>
           <span className='text-2xl font-medium'>#1 MATRIMONY</span>
