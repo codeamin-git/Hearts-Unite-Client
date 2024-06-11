@@ -10,11 +10,13 @@ const BiodataDetails = ({biodata}) => {
           src={biodata.profileImage}
           className="mb-3 rounded-full shadow-lg h-24 w-24"
         />
-        <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">Biodata Id: {biodata.biodataId}</h5>
-        <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">Name: {biodata.name}</h5>
-        <span className="text-sm text-gray-500 dark:text-gray-400">Permanent Address: {biodata.permanentDivision}</span>
-        <span className="text-sm text-gray-500 dark:text-gray-400">Age: {biodata.age}</span>
-        <span className="text-sm text-gray-500 dark:text-gray-400">Occupation: {biodata.occupation}</span>
+        <div>
+        <h5 className="mb-1 text-xl text-gray-900 dark:text-white"><span className="font-medium">Biodata Id:</span> {biodata.biodataId}</h5>
+        <h5 className="mb-1 text-xl text-gray-900 dark:text-white"><span className="font-medium">Name:</span> {biodata.name}</h5>
+        <p className="text-sm text-gray-900 dark:text-gray-400"><span className="font-medium">Permanent Address:</span> {biodata.permanentDivision}</p>
+        <p className="text-sm text-gray-900 dark:text-gray-400"><span className="font-medium">Age:</span> {biodata.age}</p>
+        <p className="text-sm text-gray-900 dark:text-gray-400"><span className="font-medium">Occupation:</span> {biodata.occupation}</p>
+        </div>
         <div className="mt-4 flex space-x-3 lg:mt-6">
           <Link to={`/biodata/${biodata._id}`}>
           <Button outline gradientDuoTone="purpleToPink">

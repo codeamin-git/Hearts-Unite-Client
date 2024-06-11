@@ -23,6 +23,8 @@ const SingleBiodataDetails = () => {
         }
     })
 
+    
+
     const handleFavBiodata = async (biodata) => {
         const favBiodata = {
             name: biodata.name,
