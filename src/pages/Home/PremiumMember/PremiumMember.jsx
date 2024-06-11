@@ -45,7 +45,7 @@ const PremiumMember = () => {
   };
 
   const {ref, replay} = useScramble({
-    text: "Premium Member",
+    text: "Premium Biodata",
     speed: 0.6,
     tick: 1,
     step: 1,
@@ -69,7 +69,7 @@ const PremiumMember = () => {
           {/* premium section heading */}
           <div className="mb-4 flex justify-between">
             <div>
-                <p className="text-3xl font-medium">These are some of out <span ref={ref} onMouseOver={replay} onMouseEnter={replay} className="text-pink-400 font-bold text-4xl"></span> <br /> You can have a look!</p>
+                <p className="text-3xl font-medium">These are some of our <span ref={ref} onMouseOver={replay} onMouseEnter={replay} className="text-pink-500 font-bold text-4xl"></span> <br /> You may have a look!</p>
             </div>
                 <div>
                 <label htmlFor="sortOrder" className="block text-gray-700 font-bold mb-2">
