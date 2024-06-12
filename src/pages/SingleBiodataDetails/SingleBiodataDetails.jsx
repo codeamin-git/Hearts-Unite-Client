@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Button } from "flowbite-react";
+import { Button, Card } from "flowbite-react";
 import { GiLoveMystery } from "react-icons/gi";
 import { TbInfoTriangle } from "react-icons/tb";
 import useRole from "../../../hooks/useRole";
@@ -23,7 +23,18 @@ const SingleBiodataDetails = () => {
         }
     })
 
-    
+    // Fetch similar biodata based on biodataType of the fetched biodata
+    const { data: similarBios = [], isLoading: isSimilarLoading } = useQuery({
+        queryKey: ['similar', biodata.biodataType],
+        queryFn: async () => {
+            if (!biodata.biodataType) return [];
+            const { data } = await axiosSecure.get(`/similarBiodatas`, {
+                params: { biodataType: biodata.biodataType }
+            });
+            return data;
+        },
+        enabled: !!biodata.biodataType
+    });
 
     const handleFavBiodata = async (biodata) => {
         const favBiodata = {
@@ -47,7 +58,7 @@ const SingleBiodataDetails = () => {
 
     
 
-    if(isLoading) return <LoadingSpinner></LoadingSpinner>
+    if(isLoading || isSimilarLoading) return <LoadingSpinner></LoadingSpinner>
     return (
         <div>
             {biodata && <div>
@@ -114,7 +125,44 @@ const SingleBiodataDetails = () => {
 </section>
                 
                 </div>}
+
+                {/* similar bio */}
+                <div>
+            <div className="">
+                
+            </div>
+            <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                
+                {similarBios.map(similar => (
+                    <div key={similar?._id} className="">
+                        <Card className="max-w-sm bg-ivory bg-opacity-20">
+      <div className="flex ">
+        <img
+          src={similar?.profileImage}
+          className="mb-3 rounded-full shadow-lg h-24 w-24"
+        />
+        <div>
+        <h5 className="mb-1 text-xl text-gray-900 dark:text-white"><span className="font-medium">Biodata Id:</span> {similar?.biodataId}</h5>
+        <h5 className="mb-1 text-xl text-gray-900 dark:text-white"><span className="font-medium">Name:</span> {similar?.name}</h5>
+        <p className="text-sm text-gray-900 dark:text-gray-400"><span className="font-medium">Permanent Address:</span> {biodata.permanentDivision}</p>
         </div>
+        <div className="mt-4 flex space-x-3 lg:mt-6">
+          <Link to={`/biodata/${similar?._id}`}>
+          <Button outline gradientDuoTone="purpleToPink">
+            View Profile
+          </Button>
+          </Link>
+        </div>
+      </div>
+    </Card>
+                    </div>
+                ))}
+            </div>
+            </div>
+        </div>
+        </div>
+
     );
 };
 
