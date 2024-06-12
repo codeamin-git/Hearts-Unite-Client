@@ -1,19 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
 import { Button } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useScramble } from "use-scramble";
 import { SlSymbolMale, SlSymbleFemale } from "react-icons/sl";
+import useAxiosCommon from "../../../../hooks/useAxiosCommon";
 
 const PremiumMember = () => {
-    const axiosSecure = useAxiosSecure()
+    const axiosCommon = useAxiosCommon()
     const [sortOrder, setSortOrder] = useState('');
     const {data: biodatas = [], isLoading} = useQuery({
         queryKey: ['allPremium'],
         queryFn: async () => {
-            const {data} = await axiosSecure.get('/allPremiumMember')
+            const {data} = await axiosCommon.get('/allPremiumMember')
             const limit = 6;
             const maxMember = data.slice(0, limit)
             return maxMember;
