@@ -19,6 +19,9 @@ export default {
         charcoal: '#36454F',
         lightgray: '#D3D3D3',
       },
+      fontFamily: {
+        lato: ['Lato', 'sans-serif'],
+      },
     },
   },
   plugins: [

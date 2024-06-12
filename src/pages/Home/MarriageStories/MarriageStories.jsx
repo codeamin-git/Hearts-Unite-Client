@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 
 const MarriageStories = () => {
     const [stories, setStories] = useState([]);
-    const [sortOrder, setSortOrder] = useState('ascending');
+    const [sortOrder, setSortOrder] = useState('');
+    const [maxStories, setMaxStories] = useState(6);
     useEffect(()=>{
         fetch(`${import.meta.env.VITE_API_URL}/success-stories`)
         .then(res => res.json())
-        .then(data => setStories(data))
+        .then(data => {
+            const limitedStories = data.slice(0, maxStories);
+      setStories(limitedStories);
+        })
     }, [])
     
     // Function to sort stories by marriageDate
@@ -39,6 +43,7 @@ const MarriageStories = () => {
                     onChange={handleSortChange}
                     className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400 max-w-sm"
                 >
+                    <option value="">Default</option>
                     <option value="ascending">Ascending</option>
                     <option value="descending">Descending</option>
                 </select>
